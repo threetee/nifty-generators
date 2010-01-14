@@ -23,7 +23,7 @@ require 'rails_generator'
 require 'shoulda' # gem install Shoulda
 require 'mocha'
 
-module NiftyGenerators
+module TttGenerators
   module TestHelper
     include RubiGen::GeneratorTestHelper
   
@@ -71,7 +71,7 @@ module NiftyGenerators
 end
 
 class Thoughtbot::Shoulda::Context
-  include NiftyGenerators::ShouldaAdditions
+  include TttGenerators::ShouldaAdditions
 end
 
 # Mock out what we need from AR::Base.

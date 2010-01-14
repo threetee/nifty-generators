@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "test_helper.rb")
 
-class TestNiftyScaffoldGenerator < Test::Unit::TestCase
-  include NiftyGenerators::TestHelper
+class TestTttScaffoldGenerator < Test::Unit::TestCase
+  include TttGenerators::TestHelper
   
   # Some generator-related assertions:
   #   assert_generated_file(name, &block) # block passed the file contents
@@ -32,13 +32,13 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     context "generator without name" do
       should "raise usage error" do
         assert_raise Rails::Generator::UsageError do
-          run_rails_generator :nifty_scaffold
+          run_rails_generator :ttt_scaffold
         end
       end
     end
   
     context "generator with no options and no existing model" do
-      rails_generator :nifty_scaffold, "LineItem"
+      rails_generator :ttt_scaffold, "LineItem"
     
       should_generate_file "app/helpers/line_items_helper.rb"
     
@@ -71,7 +71,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with some attributes" do
-      rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+      rails_generator :ttt_scaffold, "line_item", "name:string", "description:text"
       
       should "generate migration with attribute columns" do
         file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
@@ -94,7 +94,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with index action" do
-      rails_generator :nifty_scaffold, "line_item", "index"
+      rails_generator :ttt_scaffold, "line_item", "index"
     
       should_generate_file "app/views/line_items/index.html.erb"
     
@@ -108,7 +108,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with show action" do
-      rails_generator :nifty_scaffold, "line_item", "show"
+      rails_generator :ttt_scaffold, "line_item", "show"
     
       should_generate_file "app/views/line_items/show.html.erb"
     
@@ -121,7 +121,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with new and create actions" do
-      rails_generator :nifty_scaffold, "LineItem", "new", "create"
+      rails_generator :ttt_scaffold, "LineItem", "new", "create"
     
       should_not_generate_file "app/views/line_items/create.html.erb"
       should_not_generate_file "app/views/line_items/_form.html.erb"
@@ -147,7 +147,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with edit and update actions" do
-      rails_generator :nifty_scaffold, "line_item", "edit", "update"
+      rails_generator :ttt_scaffold, "line_item", "edit", "update"
     
       should_not_generate_file "app/views/line_items/update.html.erb"
       should_not_generate_file "app/views/line_items/_form.html.erb"
@@ -172,7 +172,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with edit and update actions" do
-      rails_generator :nifty_scaffold, "line_item", "destroy"
+      rails_generator :ttt_scaffold, "line_item", "destroy"
     
       should_not_generate_file "app/views/line_items/destroy.html.erb"
     
@@ -188,7 +188,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with new and edit actions" do
-      rails_generator :nifty_scaffold, "line_item", "new", "edit"
+      rails_generator :ttt_scaffold, "line_item", "new", "edit"
     
       should_generate_file "app/views/line_items/_form.html.erb"
     
@@ -202,7 +202,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with attributes and actions" do
-      rails_generator :nifty_scaffold, "line_item", "name:string", "new", "price:float", "index", "available:boolean"
+      rails_generator :ttt_scaffold, "line_item", "name:string", "new", "price:float", "index", "available:boolean"
     
       should "render a form field for each attribute in 'new' template" do
         assert_generated_file "app/views/line_items/new.html.erb" do |body|
@@ -214,7 +214,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with show, create, and update actions" do
-      rails_generator :nifty_scaffold, "line_item", "show", "create", "update"
+      rails_generator :ttt_scaffold, "line_item", "show", "create", "update"
     
       should "redirect to line item show page, not index" do
         assert_generated_file "app/controllers/line_items_controller.rb" do |body|
@@ -225,7 +225,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with attributes and skip model option" do
-      rails_generator :nifty_scaffold, "line_item", "foo:string", :skip_model => true
+      rails_generator :ttt_scaffold, "line_item", "foo:string", :skip_model => true
       
       should "use passed attribute" do
         assert_generated_file "app/views/line_items/_form.html.erb" do |body|
@@ -241,7 +241,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with no attributes" do
-      rails_generator :nifty_scaffold, "line_item"
+      rails_generator :ttt_scaffold, "line_item"
       
       should "not generate migration file" do
         assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
@@ -251,7 +251,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with only new and edit actions" do
-      rails_generator :nifty_scaffold, "line_item", "new", "edit"
+      rails_generator :ttt_scaffold, "line_item", "new", "edit"
       
       should "included create and update actions in controller" do
         assert_generated_file "app/controllers/line_items_controller.rb" do |body|
@@ -263,7 +263,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with exclemation mark and show, new, and edit actions" do
-      rails_generator :nifty_scaffold, "line_item", "!", "show", "new", "edit"
+      rails_generator :ttt_scaffold, "line_item", "!", "show", "new", "edit"
       
       should "only include index and destroy actions" do
         assert_generated_file "app/controllers/line_items_controller.rb" do |body|
@@ -276,14 +276,14 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with --skip-controller" do
-      rails_generator :nifty_scaffold, "line_item", :skip_controller => true
+      rails_generator :ttt_scaffold, "line_item", :skip_controller => true
       should_not_generate_file "app/controllers/line_items_controller.rb"
       should_not_generate_file "app/helpers/line_items_helper.rb"
       should_not_generate_file "app/views/line_items/index.html.erb"
     end
     
     context "generator with --skip-migration" do
-      rails_generator :nifty_scaffold, "line_item", "name:string", :skip_migration => true
+      rails_generator :ttt_scaffold, "line_item", "name:string", :skip_migration => true
       
       should "not generate migration file" do
         assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
@@ -291,7 +291,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with --skip-timestamps" do
-      rails_generator :nifty_scaffold, "line_item", "name:string", :skip_timestamps => true
+      rails_generator :ttt_scaffold, "line_item", "name:string", :skip_timestamps => true
       
       should "generate migration with no timestamps" do
         file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
@@ -316,7 +316,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     
       context "generator with skip model option" do
-        rails_generator :nifty_scaffold, "recipe", :skip_model => true
+        rails_generator :ttt_scaffold, "recipe", :skip_model => true
     
         should "use model columns for attributes" do
           assert_generated_file "app/views/recipes/_form.html.erb" do |body|
@@ -335,7 +335,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     
       context "generator with attribute specified" do
-        rails_generator :nifty_scaffold, "recipe", "zippo:string"
+        rails_generator :ttt_scaffold, "recipe", "zippo:string"
     
         should "use specified attribute" do
           assert_generated_file "app/views/recipes/_form.html.erb" do |body|
@@ -355,7 +355,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with some attributes" do
-        rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+        rails_generator :ttt_scaffold, "line_item", "name:string", "description:text"
         
         should_generate_file "spec/models/line_item_spec.rb"
         
@@ -380,7 +380,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with new and index actions" do
-        rails_generator :nifty_scaffold, "line_item", "new", "index"
+        rails_generator :ttt_scaffold, "line_item", "new", "index"
         
         should "have controller spec with only mentioned actions" do
           assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
@@ -402,7 +402,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with edit and index actions" do
-        rails_generator :nifty_scaffold, "line_item", "edit", "index"
+        rails_generator :ttt_scaffold, "line_item", "edit", "index"
         
         should "redirect to index action on successful update" do
           assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
@@ -412,7 +412,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with testunit specified" do
-        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :testunit
+        rails_generator :ttt_scaffold, "line_item", "name:string", :test_framework => :testunit
         
         should_generate_file "test/unit/line_item_test.rb"
       end
@@ -428,7 +428,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with some attributes" do
-        rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+        rails_generator :ttt_scaffold, "line_item", "name:string", "description:text"
         
         should_generate_file "test/unit/line_item_test.rb"
         
@@ -453,7 +453,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with new and index actions" do
-        rails_generator :nifty_scaffold, "line_item", "new", "index"
+        rails_generator :ttt_scaffold, "line_item", "new", "index"
         
         should "have controller test with only mentioned actions" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
@@ -475,7 +475,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with edit and index actions" do
-        rails_generator :nifty_scaffold, "line_item", "edit", "index"
+        rails_generator :ttt_scaffold, "line_item", "edit", "index"
         
         should "redirect to index action on successful update" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
@@ -485,13 +485,13 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
       
       context "generator with rspec specified" do
-        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :rspec
+        rails_generator :ttt_scaffold, "line_item", "name:string", :test_framework => :rspec
         
         should_generate_file "spec/models/line_item_spec.rb"
       end
       
       context "generator with shoulda specified" do
-        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :shoulda
+        rails_generator :ttt_scaffold, "line_item", "name:string", :test_framework => :shoulda
         
         should "have controller and model tests using shoulda syntax" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
@@ -506,7 +506,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with haml option" do
-      rails_generator :nifty_scaffold, "LineItem", :haml => true
+      rails_generator :ttt_scaffold, "LineItem", :haml => true
       
       %w[index show new edit _form].each do |action|
         should_generate_file "app/views/line_items/#{action}.html.haml"

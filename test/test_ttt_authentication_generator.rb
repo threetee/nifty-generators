@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "test_helper.rb")
 
-class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
-  include NiftyGenerators::TestHelper
+class TestTttAuthenticationGenerator < Test::Unit::TestCase
+  include TttGenerators::TestHelper
   
   # Some generator-related assertions:
   #   assert_generated_file(name, &block) # block passed the file contents
@@ -36,7 +36,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
     end
 
     context "generator without arguments" do
-      rails_generator :nifty_authentication
+      rails_generator :ttt_authentication
       should_generate_file 'app/models/user.rb'
       should_generate_file 'app/controllers/users_controller.rb'
       should_generate_file 'app/helpers/users_helper.rb'
@@ -73,7 +73,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
     end
 
     context "generator with user and session names" do
-      rails_generator :nifty_authentication, "Account", "CurrentSession"
+      rails_generator :ttt_authentication, "Account", "CurrentSession"
       should_generate_file 'app/models/account.rb'
       should_generate_file 'app/controllers/accounts_controller.rb'
       should_generate_file 'app/helpers/accounts_helper.rb'
@@ -98,7 +98,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
     end
     
     context "generator with shoulda option" do
-      rails_generator :nifty_authentication, :test_framework => :shoulda
+      rails_generator :ttt_authentication, :test_framework => :shoulda
       
       should "have controller and model tests using shoulda syntax" do
         assert_generated_file "test/functional/users_controller_test.rb" do |body|
@@ -115,7 +115,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
     end
     
     context "generator with rspec option" do
-      rails_generator :nifty_authentication, :test_framework => :rspec
+      rails_generator :ttt_authentication, :test_framework => :rspec
       should_generate_file 'spec/fixtures/users.yml'
     end
     
@@ -129,7 +129,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       end
       
       context "generator without arguments" do
-        rails_generator :nifty_authentication
+        rails_generator :ttt_authentication
         should_generate_file 'spec/fixtures/users.yml'
         should_generate_file 'spec/models/user_spec.rb'
         should_generate_file 'spec/controllers/users_controller_spec.rb'
@@ -137,7 +137,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       end
       
       context "generator with user and session names" do
-        rails_generator :nifty_authentication, "Account", "CurrentSessions"
+        rails_generator :ttt_authentication, "Account", "CurrentSessions"
         should_generate_file 'spec/fixtures/accounts.yml'
         should_generate_file 'spec/models/account_spec.rb'
         should_generate_file 'spec/controllers/accounts_controller_spec.rb'
@@ -145,20 +145,20 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       end
       
       context "generator with testunit option" do
-        rails_generator :nifty_authentication, :test_framework => :testunit
+        rails_generator :ttt_authentication, :test_framework => :testunit
         should_generate_file 'test/fixtures/users.yml'
       end
     end
     
     context "generator with haml option" do
-      rails_generator :nifty_authentication, :haml => true
+      rails_generator :ttt_authentication, :haml => true
       
       should_generate_file "app/views/users/new.html.haml"
       should_generate_file "app/views/sessions/new.html.haml"
     end
 
     context "generator with authlogic option and custom names" do
-      rails_generator :nifty_authentication, "Account", :authlogic => true
+      rails_generator :ttt_authentication, "Account", :authlogic => true
       should_generate_file 'app/models/account.rb'
       should_generate_file 'app/controllers/accounts_controller.rb'
       should_generate_file 'app/helpers/accounts_helper.rb'

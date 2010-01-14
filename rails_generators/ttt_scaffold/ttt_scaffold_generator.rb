@@ -1,4 +1,4 @@
-class NiftyScaffoldGenerator < Rails::Generator::Base
+class TttScaffoldGenerator < Rails::Generator::Base
   attr_accessor :name, :attributes, :controller_actions
   
   def initialize(runtime_args, runtime_options = {})
@@ -49,6 +49,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
         
+        m.directory "test/factories"
+        m.template "factory.rb", "test/factories/#{plural_name}.rb"
+
         if rspec?
           m.directory "spec/models"
           m.template "tests/#{test_framework}/model.rb", "spec/models/#{singular_name}_spec.rb"

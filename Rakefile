@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('ttt-generators', '0.3.1') do |p|
+Echoe.new('ttt-generators', '0.3.2') do |p|
   p.project        = "ttt-niftygenerators"
   p.description    = "A collection of useful generator scripts for Rails, modified for TTT's use."
   p.url            = "http://github.com/threetee/nifty-generators"
