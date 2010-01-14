@@ -7,7 +7,7 @@ class <%= plural_class_name %>Controller < ApplicationController
 
   private
   def invalid_request
-    flash[:error] = "Couldn't find that <%= class_name %>"
+    flash[:error] = "Couldn't find that <%= singular_name %>"
     redirect_to root_url
   end
 end
