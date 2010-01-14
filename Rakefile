@@ -2,10 +2,10 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('nifty-generators', '0.3.0') do |p|
-  p.project        = "niftygenerators"
-  p.description    = "A collection of useful generator scripts for Rails."
-  p.url            = "http://github.com/ryanb/nifty-generators"
+Echoe.new('ttt-generators', '0.3.1') do |p|
+  p.project        = "ttt-niftygenerators"
+  p.description    = "A collection of useful generator scripts for Rails, modified for TTT's use."
+  p.url            = "http://github.com/threetee/nifty-generators"
   p.author         = 'Ryan Bates'
   p.email          = "ryan (at) railscasts (dot) com"
   p.ignore_pattern = ["script/*"]
